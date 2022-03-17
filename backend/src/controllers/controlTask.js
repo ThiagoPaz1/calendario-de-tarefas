@@ -44,7 +44,7 @@ const resRegisterTask = async (req, res) => {
   try {
     await task.save();
 
-    return res.status(200).json({message: 'Tarefa salva com sucesso!'});
+    return res.status(200).json(task);
   } catch (error) {
     res.send(error);
   } 
@@ -74,12 +74,53 @@ const findTask = async (req, res) => {
     return res.status(400).json({message: 'title inválido, verifique se title não esta vazio.'});
   }
 
-  return res.status(200).json(taskFind);
-}  
+  try {
+    return res.status(200).json(taskFind); 
+  } catch (error) {
+    return res.send(error);
+  } 
+}
+
+const editTask = async (req, res) => {
+  const { title, description, date, timeDuration } = req.body;
+  const { id } = req.params;
+  const arr = [title, description, date, timeDuration];
+  const findId = await queriesTask.findDB({_id: id});
+
+  if (!findId) {
+    console.log(id)
+    return res.status(400).json({message: "Tarefa não encontrada."});
+  }
+
+  for (let i in arr) {
+    const checkStr = arr[i] == '' || arr[i] == ' ';
+    const checkBool = Boolean(arr[i]) == false;
+
+    if (checkStr || checkBool) {
+      return res.status(400).json({message: " Todos os campos devem esta preenchidos."});
+    }
+  }
+
+  const updateTask = {
+    title,
+    description,
+    date,
+    timeDuration
+  }
+
+  try {
+    await queriesTask.update({_id: id}, updateTask);
+
+    return res.status(200).json({message: 'Alterações realizadas com sucesso!'});
+  } catch(error) {
+    return res.send(error);
+  }
+}
 
 module.exports = {
   validateBodyReq,
   resRegisterTask,
   allTask,
-  findTask
+  findTask,
+  editTask
 }

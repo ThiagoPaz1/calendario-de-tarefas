@@ -11,7 +11,7 @@ router.post('/new-task',
   controlTask.resRegisterTask
 );
 
-router.put('/edit-task');
+router.put('/edit-task/:id', controlTask.editTask);
 
 router.delete('/remove-task');
 
