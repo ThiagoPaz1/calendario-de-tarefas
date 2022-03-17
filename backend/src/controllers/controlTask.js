@@ -20,7 +20,7 @@ const validateBodyReq = async (req, res, next) => {
   }
 
   for (let i in arr) {
-    let checkStr = arr[i] == '' || arr[i] == ' ';
+    const  checkStr = arr[i] == '' || arr[i] == ' ';
     let checkBool = Boolean(arr[i]) == false;
 
     if (checkStr || checkBool) {
@@ -60,8 +60,26 @@ const allTask = async (_req, res) => {
   }
 }
 
+const findTask = async (req, res) => {
+  const { title } = req.params;
+  const checkStr = title == '' || title == ' ';
+  const checkBool = title == false;
+  const taskFind = await queriesTask.findDB({title: title});
+
+  if (!taskFind) {
+    return res.status(400).json({message: 'title não encontrado.'});
+  }
+
+  if (checkStr || checkBool) {
+    return res.status(400).json({message: 'title inválido, verifique se title não esta vazio.'});
+  }
+
+  return res.status(200).json(taskFind);
+}  
+
 module.exports = {
   validateBodyReq,
   resRegisterTask,
-  allTask
+  allTask,
+  findTask
 }
