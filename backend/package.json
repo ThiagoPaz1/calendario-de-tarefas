@@ -1,0 +1,28 @@
+{
+  "name": "calendario-de-tarefas",
+  "version": "1.0.0",
+  "description": "Aplicação para controle das tarefas do dia. :warning: Em produção :warning:",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThiagoPaz1/calendario-de-tarefas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThiagoPaz1/calendario-de-tarefas/issues"
+  },
+  "homepage": "https://github.com/ThiagoPaz1/calendario-de-tarefas#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.6"
+  }
+}
