@@ -117,10 +117,28 @@ const editTask = async (req, res) => {
   }
 }
 
+const removeTask = async (req, res) => {
+  const { id } = req.params;
+  const findId = await queriesTask.findDB({_id: id});
+
+  if (!findId) {
+    return res.status(400).json({message: 'Tarefa não encontrada.'});
+  }
+
+  try {
+    await queriesTask.taskDelete({_id: id});
+
+    return res.status(200).json({message: 'Tarefa removida com sucesso!'});
+  } catch (error) {
+    return res.send(error);
+  }
+}
+
 module.exports = {
   validateBodyReq,
   resRegisterTask,
   allTask,
   findTask,
-  editTask
+  editTask,
+  removeTask
 }

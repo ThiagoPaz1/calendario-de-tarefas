@@ -18,8 +18,15 @@ const update = async (id, newValue) => {
   return editTask;
 }
 
+const taskDelete = async (id) => {
+  const deleteTask = await Task.deleteOne(id);
+
+  return deleteTask;
+}
+
 module.exports = {
   findDB,
   findAllDB,
-  update
+  update,
+  taskDelete
 }

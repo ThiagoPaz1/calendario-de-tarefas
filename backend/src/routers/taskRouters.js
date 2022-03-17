@@ -13,6 +13,6 @@ router.post('/new-task',
 
 router.put('/edit-task/:id', controlTask.editTask);
 
-router.delete('/remove-task');
+router.delete('/remove-task/:id', controlTask.removeTask);
 
 module.exports = router;
