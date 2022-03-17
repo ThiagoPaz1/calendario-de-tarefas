@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { validateBodyReq, resRegisterTask } = require('../controllers/controlTask');
+const { validateBodyReq, resRegisterTask, allTask } = require('../controllers/controlTask');
 
 router.get('/get-task');
-router.get('/all-task');
+router.get('/all-task', allTask);
 
 router.post('/new-task', validateBodyReq, resRegisterTask);
 
