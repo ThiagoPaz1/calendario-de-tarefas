@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
+
+import Main from '../components/Main';
 
 function MainArea() {
   return (
     <div>
-      Você esta na página inicial
+      <Main />
     </div>
   );
 }
