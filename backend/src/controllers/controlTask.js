@@ -5,7 +5,7 @@ const moment = require('moment');
 const validateBodyReq = async (req, res, next) => {
   const {title, description, date, timeDuration} = req.body;
   const arr = [title, description, date, timeDuration];
-  const validDate = moment(date, 'DD/MM/YY', true).isValid() == false;
+  const validDate = moment(date, 'DD/MM/YY').isValid() == false;
 
   if (await queriesTask.findDB({title: title})) {
     return res.status(400).json({message: "Título já cadastrado em outra tarefa"});
@@ -16,7 +16,7 @@ const validateBodyReq = async (req, res, next) => {
   }
 
   if (validDate) {
-    return res.status(400).json({message: "O campo da date, deve esta nesse formato DD/MM/YY ."});
+    return res.status(400).json({message: "O campo da date, deve esta nesse formato DD/MM/YY"});
   }
 
   for (let i in arr) {
