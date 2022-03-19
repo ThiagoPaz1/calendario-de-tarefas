@@ -1,4 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 
 import { TaskContext } from '../context/Tasks';
@@ -6,26 +8,33 @@ import { TaskContext } from '../context/Tasks';
 function Tasks() {
   const { tasks, setTasks } = useContext(TaskContext);
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:3000/task/all-task')
-  //   .then((response) => setTasks([...tasks, response.data]))
-  //   .catch(() => console.log('Houve um erro.'));
-  // }, []);
-
+  const deleteTask = (item) => {
+    axios.delete(`http://localhost:3000/task/remove-task/${item._id}`)
+    .then(() => {
+      axios.get('http://localhost:3000/task/all-task')
+      .then((response) => setTasks(response.data))
+      .catch(() => console.log('Houve um erro.'));   
+    })
+    .catch(() => console.log('Houve um erro.'));
+  }
   return (
     <div>
-      TAREFAS
+      Tarefas
       <ul>
-      {/* {
-        tasks.map((item, index) =>
+      {
+        tasks ? tasks.map((item, index) =>
           <li key={ index }>
-            Título: {item.title}
-            Descrição: { item.description }
-            Data: { item.date }
-            tempo de duração: { item.timeDuration }
+            <div>Título: {item.title}</div>
+            <div>Descrição: { item.description }</div>
+            <div>Data: { item.date }</div>
+            <div>Tempo de duração: { item.timeDuration }</div>
+            <Link to={`/addOrEdit/${item._id}`} >
+              <button>Editar</button>
+            </Link>
+            <button onClick={ () => deleteTask(item) }>Deletar</button>
           </li>
-        )
-      } */}
+        ) : ''
+      }
      </ul>
     </div>
   );

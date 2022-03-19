@@ -12,7 +12,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={ <MainArea /> } />
-            <Route path="/addOrEdit" element={ <AddOrEditArea /> } />
+            <Route path="/addOrEdit/:active" element={ <AddOrEditArea /> } />
           </Routes>
        </BrowserRouter>
       </div>

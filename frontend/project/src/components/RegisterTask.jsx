@@ -4,7 +4,7 @@ import axios from 'axios';
 import { TaskContext } from '../context/Tasks';
 
 function RegisterTask() {
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { tasks } = useContext(TaskContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState();
@@ -59,15 +59,13 @@ function RegisterTask() {
 
     if (!message) {
       axios.post(`http://localhost:3000/task/new-task`, bodyReq)
-      .then((response) => {
+      .then(() => {
         setTitle('');
         setDescription('');
         setDate('');
         setTimeDuration('');
-        setTasks([...tasks, response.data]);
-
-        console.log(response.data)})
-      .catch(() => console.log('Houve um erro.'));
+      })
+      .catch(() => console.log(tasks));
     }
 
   }
@@ -77,20 +75,20 @@ function RegisterTask() {
       <form style={{display: 'flex'}}>
         <label>
           Titulo
-          <input name="setTitle" onChange={onChangeTitle} type="text" />
+          <input value={title} onChange={onChangeTitle} type="text" />
         </label>
         <label>
           Descrição
-          <textarea name={setDescription} onChange={onChangeDescription} cols="30" rows="1" />
+          <textarea value={description} onChange={onChangeDescription} cols="30" rows="1" />
         </label>
         <label>
           Data
-          <input name={setDate} onChange={onChangeDate} type="text" placeholder="Exemplo: 01/08/2000" />
+          <input value={date} onChange={onChangeDate} type="text" placeholder="Exemplo: 01/08/2000" />
         </label>
         <label>
           Tempo de duração
           <input
-            name={setTimeDuration}
+            value={timeDuration}
             onChange={onChangeTimeDuration}
             type="text"
             placeholder="Exemplo: 2 horas e 20 minutos"
