@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import RegisterTask from '../components/RegisterTask';
+import EditTask from '../components/EditTask';
 
 function AddOrEditArea() {
+  const { active } = useParams();
+
   return (
     <div>
-      <RegisterTask />
+      { active === 'show' ? <RegisterTask /> : '' }
+      { active !== 'show' ? <EditTask dataTask={ active } /> : '' }
       <Link to="/">
         <span>Retorna a página inicial</span>
       </Link>
