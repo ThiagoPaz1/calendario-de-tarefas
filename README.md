@@ -17,9 +17,9 @@
   <li>Axios</li>
   <li>Styled Components</li>
 </ul>
-<h2>Comandos uteis:</h2>
+<h2>Instruções para iniciar a aplicação:</h2>
 <ul>
-  <li>Para iniciar o servidor digite:<h5>npm start, dentro da pasta backend</h5></li>
-  <li>Para iniciar o app digite:<h5>npm start, dentro da pasta frontend/project</h5></li>
+  <li>Primeiro, inicie o servidor, digite:<h5>npm start, dentro da pasta backend</h5></li>
+  <li>Segundo, inicie o app digite:<h5>npm start, dentro da pasta frontend/project</h5></li>
 </ul>
 
