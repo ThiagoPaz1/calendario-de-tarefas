@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
+
 import axios from 'axios';
+import moment from 'moment';
 
 import { TaskContext } from '../context/Tasks';
 
@@ -38,8 +40,13 @@ function RegisterTask() {
 
   const addTask = (event) => {
     event.preventDefault();
+    
+    const result = moment(date, 'DD/MM/YY',true).isValid();
+    const arrCheck = [title, description, timeDuration, date];
 
-    const arrCheck = [title, description, timeDuration];
+    if (!result) {
+      return alert('O campo data precisa esta neste formato DD/MM/YY');
+    }
 
     for (let i in arrCheck) {
       const checkStr = arrCheck[i] === '' || arrCheck[i] === ' ';
