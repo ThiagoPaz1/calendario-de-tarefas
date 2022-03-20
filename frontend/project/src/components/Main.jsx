@@ -9,6 +9,7 @@ function Main() {
   const { tasks, setTasks } = useContext(TaskContext);
   const [titleTasks, setTitleTasks] = useState(''); 
   const [message, setMessage] = useState();
+  const [specificPeriod, setSpecificPeriod] = useState(''); 
 
   useEffect(() => {
     axios.get('http://localhost:3000/task/all-task')
@@ -18,6 +19,10 @@ function Main() {
 
   const handleChange = ({ target }) => {
     setTitleTasks(target.value);
+  }
+
+  const handleChangePeriod = ({ target}) => {
+    setSpecificPeriod(target.value);
   }
 
   const filterDay = ({ target }) => {
@@ -49,7 +54,7 @@ function Main() {
 
   const findTitleTasks = () => {
     const findTasks = tasks.filter(element => element.title == titleTasks);
-    
+
     if (!titleTasks || titleTasks === '' || titleTasks === '') {
      return setMessage('É necessário digitar algum de titulo de tarefa.');
     }
@@ -59,7 +64,24 @@ function Main() {
     }
 
     if (titleTasks !== ' ') {
-      setTitleTasks('')
+      setTitleTasks('');
+      return setTasks(findTasks);
+    } 
+  }
+
+  const findSpecificPeriod = () => {
+    const findTasks = tasks.filter(element => element.date == specificPeriod);
+    
+    if (!specificPeriod || specificPeriod === '' || specificPeriod === '') {
+     return setMessage('É necessário digitar algum de data de tarefa.');
+    }
+
+    if (findTasks.length == 0) {
+      return setMessage('Nenhuma tarefa com esse data encontrada');
+    }
+
+    if (specificPeriod !== ' ') {
+      setSpecificPeriod('');
       return setTasks(findTasks);
     } 
   }
@@ -79,9 +101,20 @@ function Main() {
         Mês
         <input name="month" onClick={filterMonth} type="checkbox" />
       </label>
+      <span> ou </span>
+      <label>
+        Pesquisar por periodo especifico
+        <input
+          value={specificPeriod}
+          type="text"
+          placeholder="Exemplo: 01/02/03"
+          onChange={handleChangePeriod}
+        />
+      </label>
+      <button onClick={findSpecificPeriod}>Pesquisar</button>
       <label style={{marginLeft: '50px'}}>
         Filtrar por título da tarefa
-        <input 
+        <input
           style={{marginLeft: '5px'}}
           onChange={handleChange}
           type="text"
