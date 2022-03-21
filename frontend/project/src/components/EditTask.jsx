@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
 import { TaskContext } from '../context/Tasks';
+import { EditStyle } from './styles';
 
 function EditTask({ dataTask }) {
   const { tasks } = useContext(TaskContext);
@@ -67,36 +68,41 @@ function EditTask({ dataTask }) {
   }
 
   return (
-    <div>
-      <form style={{display: 'flex'}}>
-        <label>
-          Titulo
-          <input value={titleEdit} onChange={handleChangeTitle} type="text" />
-        </label>
-        <label>
-          Descrição
-          <input 
-            value={descriptionEdit}
-            onChange={handleChangeDescription}
-            type="text"
-          />
-        </label>
-        <label>
-          Data
-          <input value={dateEdit} onChange={handleChangeDate} type="text" />
-        </label>
-        <label>
-          Tempo de duração
-          <input
-            value={timeDurationEdit}
-            onChange={handleChangeTimeDuration}
-            type="text"
-          />
-        </label>
-        <button onClick={editSave}>Salvar</button>
-      </form>
-      <h1>{ message }</h1>
-    </div>
+    <EditStyle>
+      <div>
+      <h1>Editar tarefa</h1>
+          <form style={{display: 'flex'}}>
+          <div>
+            <label>
+              <span>Titulo</span><br />
+              <input value={titleEdit} onChange={handleChangeTitle} type="text" />
+            </label>
+            <label>
+            <span>Descrição</span><br />
+              <textarea 
+                value={descriptionEdit}
+                onChange={handleChangeDescription}
+                type="text"
+              />
+            </label>
+            <label>
+            <span>Data</span><br />
+              <input value={dateEdit} onChange={handleChangeDate} type="text" />
+            </label>
+            <label>
+            <span>Tempo de duração</span><br />
+              <input
+                value={timeDurationEdit}
+                onChange={handleChangeTimeDuration}
+                type="text"
+              />
+            </label>
+          </div> 
+          <button onClick={editSave}>Salvar</button>
+        </form>
+        <h1>{ message }</h1>
+      </div>
+    </EditStyle>  
   );
 }
 
