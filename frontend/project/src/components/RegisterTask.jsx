@@ -4,6 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import { TaskContext } from '../context/Tasks';
+import { RegiterStyle } from './styles';
 
 function RegisterTask() {
   const { tasks } = useContext(TaskContext);
@@ -78,33 +79,43 @@ function RegisterTask() {
   }
 
   return (
-    <div>
-      <form style={{display: 'flex'}}>
-        <label>
-          Titulo
-          <input value={title} onChange={onChangeTitle} type="text" />
-        </label>
-        <label>
-          Descrição
-          <textarea value={description} onChange={onChangeDescription} cols="30" rows="1" />
-        </label>
-        <label>
-          Data
-          <input value={date} onChange={onChangeDate} type="text" placeholder="Exemplo: 01/08/2000" />
-        </label>
-        <label>
-          Tempo de duração
-          <input
-            value={timeDuration}
-            onChange={onChangeTimeDuration}
-            type="text"
-            placeholder="Exemplo: 2 horas e 20 minutos"
-          />
-        </label>
-        <button onClick={addTask}>Salvar</button>
-      </form>
-      <h1>{ message }</h1>
-    </div>
+    <RegiterStyle>
+      <div>
+        <h1>Crie uma nova tarefa</h1>
+        <form style={{display: 'flex'}}>
+          <div>
+            <label>
+              <span>Titulo</span><br />
+              <input value={title} onChange={onChangeTitle} type="text" />
+            </label>
+            <label>
+              <span>Descrição</span><br />
+              <textarea
+                value={description}
+                onChange={onChangeDescription}
+                cols="30"
+                rows="10"
+              />
+            </label>
+            <label>
+              <span>Data</span><br />
+              <input value={date} onChange={onChangeDate} type="text" placeholder="Exemplo: 01/08/2000" />
+            </label>
+            <label>
+              <span>Tempo de duração</span><br />
+              <input
+                value={timeDuration}
+                onChange={onChangeTimeDuration}
+                type="text"
+                placeholder="Exemplo: 2 horas e 20 minutos"
+              />
+            </label>
+          </div>
+          <button onClick={addTask}>Salvar</button>
+        </form>
+        <h1>{ message }</h1>
+      </div>
+    </RegiterStyle>  
   );
 }
 

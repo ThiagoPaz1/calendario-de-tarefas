@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import axios from 'axios';
+import { 
+       MainStyle,
+       AddTaskStyle, 
+       SectionStyle, 
+       FiltersTastks,
+       FilterTitle } from './styles';
 
 import Tasks from './Tasks';
 import { TaskContext } from '../context/Tasks';
@@ -87,45 +94,72 @@ function Main() {
   }
 
   return (
-    <main>
-      <h1>Tarefas do dia</h1>
-      <Link to="/addOrEdit/show">
-        <span>Adicionar nova tarefa</span>
-      </Link>
-      <h3>Deseja vizualizar em qual período de tempo?</h3>
-      <label>
-        Dia
-        <input name="day" onClick={filterDay} type="checkbox" />
-      </label>
-      <label>
-        Mês
-        <input name="month" onClick={filterMonth} type="checkbox" />
-      </label>
-      <span> ou </span>
-      <label>
-        Pesquisar por periodo especifico
-        <input
-          value={specificPeriod}
-          type="text"
-          placeholder="Exemplo: 01/02/03"
-          onChange={handleChangePeriod}
-        />
-      </label>
-      <button onClick={findSpecificPeriod}>Pesquisar</button>
-      <label style={{marginLeft: '50px'}}>
-        Filtrar por título da tarefa
-        <input
-          style={{marginLeft: '5px'}}
-          onChange={handleChange}
-          type="text"
-          value={titleTasks}
-          placeholder="Digite um título"
-        />
-      </label>
-      <button onClick={findTitleTasks}>Pesquisar</button>
-      <h3>{ message }</h3>
-      <Tasks />
-    </main>
+    <MainStyle>
+      <main>
+        <h1>App de Tarefas</h1>
+        <AddTaskStyle>
+          <Link
+            style={{
+              backgroundColor: '#A4A4A4',
+              padding: '5px',
+              textDecoration: 'none',
+              color: 'black',
+              border: '1.5px grey solid',
+              borderRadius: '5px',
+            }}
+            to="/addOrEdit/show"
+          >
+            <span>Adicionar nova tarefa</span>
+          </Link>
+        </AddTaskStyle>
+        <SectionStyle>
+          <section>
+            <h3>Deseja vizualizar em qual período de tempo?</h3>
+            <FiltersTastks>
+              <div>
+                <label>
+                  Dia
+                  <input name="day" onClick={filterDay} type="checkbox" />
+                </label>
+                <label>
+                  Mês
+                  <input name="month" onClick={filterMonth} type="checkbox" />
+                </label>
+                <label style={{marginLeft: '30px'}}>
+                  Pesquisar por periodo especifico
+                  <input
+                    style={{
+                      marginLeft: '5px',
+                      width: 120,
+                    }}
+                    value={specificPeriod}
+                    type="text"
+                    placeholder="Exemplo: 01/02/03"
+                    onChange={handleChangePeriod}
+                  />
+                </label>
+                <button onClick={findSpecificPeriod}>Pesquisar</button>
+              </div>
+            </FiltersTastks>
+            <FilterTitle>
+              <label style={{marginLeft: '50px'}}>
+                Filtrar por título da tarefa
+                <input
+                  style={{marginLeft: '5px', width: 120}}
+                  onChange={handleChange}
+                  type="text"
+                  value={titleTasks}
+                  placeholder="Digite um título"
+                />
+              </label>
+              <button onClick={findTitleTasks}>Pesquisar</button>
+            </FilterTitle>
+            <h3>{ message }</h3>
+            <Tasks />
+          </section>
+        </SectionStyle>
+      </main>
+    </MainStyle>  
   );
 }
 
