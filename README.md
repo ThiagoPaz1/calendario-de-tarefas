@@ -4,7 +4,7 @@
   Aplicação para controle das tarefas do dia.
   Onde você pode criar, editar, tarefas, remover
   essas tarefas, e escolher como pode vizualizar
-  essa tarefas, seja por dia, semana, mês, ou pesquisar
+  essa tarefas, seja por dia, mês, ou pesquisar
   pelo nome da tarefa.
 </p>
 <h2>Tecnologias utilizadas:</h2>
